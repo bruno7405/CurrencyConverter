@@ -1,19 +1,17 @@
 import os
 from dotenv import load_dotenv
 
-# https://app.freecurrencyapi.com/
+# https://app.currencyapi.com
 from requests import get
 
-from pprint import PrettyPrinter
-
+# https://api.currencyapi.com/v3/latest?apikey=cur_live_Ejkn5Lcar9sCzPhSFOnCITZILKzSrkk5tlALTHzh
 def configure():
     load_dotenv()
 
 configure()
 
-BASE_URL = "https://api.freecurrencyapi.com/v1/"
+BASE_URL = "https://api.currencyapi.com/v3/"
 API_KEY = os.getenv("API_KEY")
-printer = PrettyPrinter()
 
 def get_currencies():
     endpoint = f"currencies?apikey={API_KEY}"
@@ -36,12 +34,13 @@ def exchange_rate(base_currency, target_currency):
     endpoint = "latest?"
     url = BASE_URL + endpoint
     p = {'apikey': API_KEY, 'base_currency': base_currency, 'currencies': target_currency}
-    data = get(url, params=p).json() # data example output: {'data': {'CAD': 1.3830201948}}
+    data = get(url, params=p).json() # data example output: [{'last_updated_at': '2025-09-22T23:59:59Z'}, {'CAD': {'code': 'CAD', 'value': 1.3822602713}}]
 
     if len(data) == 0:
         print("Invalid currencies")
 
-    return list(data.values())[0][target_currency] # ex: 1.3830201948
+    return list(data.values())[1][target_currency]['value'] # ex: 1.3830201948
+    #return list(data.values())[0][target_currency] 
 
 def convert_currency(base_currency, target_currency, amount):
     """
@@ -69,8 +68,4 @@ def convert_currency(base_currency, target_currency, amount):
 
 #print(convert_currency('USD', 'CAD', 1000))
 
-currencies = get_currencies()[0][1]
 
-with open("currencies.txt", "w", encoding="utf-8") as f:
-    for code in currencies.keys():
-        f.write(code + "\n")
