@@ -2,11 +2,9 @@ import os
 from dotenv import load_dotenv
 
 # https://app.freecurrencyapi.com/
-import freecurrencyapi
 from requests import get
 
 from pprint import PrettyPrinter
-
 
 def configure():
     load_dotenv()
