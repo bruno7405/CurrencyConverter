@@ -67,4 +67,10 @@ def convert_currency(base_currency, target_currency, amount):
     converted_amount = rate * amount
     return converted_amount
 
-print(convert_currency('USD', 'CAD', 1000))
+#print(convert_currency('USD', 'CAD', 1000))
+
+currencies = get_currencies()[0][1]
+
+with open("currencies.txt", "w", encoding="utf-8") as f:
+    for code in currencies.keys():
+        f.write(code + "\n")

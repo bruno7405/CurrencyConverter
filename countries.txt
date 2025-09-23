@@ -1,0 +1,33 @@
+Euro
+US Dollar
+Japanese Yen
+Bulgarian Lev
+Czech Republic Koruna
+Danish Krone
+British Pound Sterling
+Hungarian Forint
+Polish Zloty
+Romanian Leu
+Swedish Krona
+Swiss Franc
+Icelandic Króna
+Norwegian Krone
+Croatian Kuna
+Russian Ruble
+Turkish Lira
+Australian Dollar
+Brazilian Real
+Canadian Dollar
+Chinese Yuan
+Hong Kong Dollar
+Indonesian Rupiah
+Israeli New Sheqel
+Indian Rupee
+South Korean Won
+Mexican Peso
+Malaysian Ringgit
+New Zealand Dollar
+Philippine Peso
+Singapore Dollar
+Thai Baht
+South African Rand

@@ -1,5 +1,6 @@
 import ListGroup from "./components/ListGroup";
 import Message from "./Message";
+import CountryDropdown from "./components/CountryDropdown";
 
 function App() {
   return (
@@ -8,6 +9,8 @@ function App() {
       <div>
         <ListGroup />
       </div>
+      <CountryDropdown />
+      <CountryDropdown />
     </>
   );
 }
