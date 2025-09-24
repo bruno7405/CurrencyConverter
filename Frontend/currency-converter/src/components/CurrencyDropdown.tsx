@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import Select from "react-select";
+import Select, { type SingleValue } from "react-select";
 
-// Currency abbreviations as options
-const options = [
+type CurrencyOption = {
+  value: string;
+  label: string;
+};
+
+const options: CurrencyOption[] = [
   { value: "EUR", label: "EUR" },
   { value: "USD", label: "USD" },
   { value: "JPY", label: "JPY" },
@@ -38,21 +42,29 @@ const options = [
   { value: "ZAR", label: "ZAR" },
 ];
 
-function CurrencySelect() {
-  const [selected, setSelected] = useState(null);
+interface Props {
+  onCurrencyChange: (currency: string) => void;
+}
+
+function CurrencyDropdown({ onCurrencyChange }: Props) {
+  const [selected, setSelected] = useState<CurrencyOption | null>(null);
+
+  const handleChange = (option: SingleValue<CurrencyOption>) => {
+    setSelected(option);
+    onCurrencyChange(option?.value ?? "");
+  };
 
   return (
     <div style={{ width: "250px" }}>
       <Select
         options={options}
         value={selected}
-        onChange={(option) => setSelected(option)}
+        onChange={handleChange}
         placeholder="Select a currency"
         isSearchable={true}
       />
-      {selected && <p>Selected: {selected.value}</p>}
     </div>
   );
 }
 
-export default CurrencySelect;
+export default CurrencyDropdown;
