@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Select, { type SingleValue } from "react-select";
 
 type CurrencyOption = {
@@ -55,7 +55,12 @@ function CurrencyDropdown({ onCurrencyChange }: Props) {
   };
 
   return (
-    <div style={{ width: "250px" }}>
+    <div
+      style={{
+        width: "250px",
+        color: "#7e8ed4ff",
+      }}
+    >
       <Select
         options={options}
         value={selected}
