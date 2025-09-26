@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import api from "./api.js";
 import "./App.css";
-import Title from "./Title";
+import Title from "./components/Title";
 import CurrencyDropdown from "./components/CurrencyDropdown";
 
 function App() {
   const [currency1, setCurrency1] = useState<string>("");
   const [currency2, setCurrency2] = useState<string>("");
   const [inputValue, setValue] = useState<string>("");
+  const [amt, setAmt] = useState<string>("");
 
   const handleAmountInput = (event: {
     target: { value: React.SetStateAction<string> };
@@ -14,10 +16,23 @@ function App() {
     setValue(event.target.value);
   };
 
-  let handleConvert = () => {
-    console.log(
-      "Converting: " + currency1 + " to " + currency2 + " | Amt: " + inputValue
-    );
+  let handleConvert = async () => {
+    try {
+      const response = await api.get("/convert", {
+        params: { f: currency1, t: currency2, amt: inputValue },
+      });
+      console.log(
+        "Converting: " +
+          currency1 +
+          " to " +
+          currency2 +
+          " | Amt: " +
+          response.data
+      );
+      setAmt(response.data.toFixed(2) + " " + currency2);
+    } catch (error) {
+      console.error("Error converting", error);
+    }
   };
 
   return (
@@ -38,6 +53,7 @@ function App() {
         <button className="convert-button" onClick={handleConvert}>
           Convert
         </button>
+        <h4>{amt}</h4>
       </div>
     </>
   );
