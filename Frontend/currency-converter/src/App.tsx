@@ -21,14 +21,6 @@ function App() {
       const response = await api.get("/convert", {
         params: { f: currency1, t: currency2, amt: inputValue },
       });
-      console.log(
-        "Converting: " +
-          currency1 +
-          " to " +
-          currency2 +
-          " | Amt: " +
-          response.data
-      );
       setAmt(response.data.toFixed(2) + " " + currency2);
     } catch (error) {
       console.error("Error converting", error);
